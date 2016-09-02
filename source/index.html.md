@@ -2,10 +2,8 @@
 title: Craft theme documentation
 
 language_tabs:
-  - php
+  - code
   - scss
-  - javascript
-  - shell
 
 toc_footers:
   - <a href='https://drivdigital.no'>A Driv Digital Product</a>
@@ -20,7 +18,7 @@ It takes every lesson we learn while creating websites for clients and rebundles
 
 ## Starting with a child theme
 
-```terminal
+```
 git clone git@github.com:drivdigital/craft-child.git
 ```
 
@@ -33,9 +31,14 @@ Another way of downloading the theme is to pull it into your themes directory.
 You must install the child theme, you must activate it to see your changes.
 </aside>
 
-## Grunt
+Once you've installed the child theme, you can customise how it looks from the getgo:
 
-```shell
+- Change the `screenshot.png` to something more relevent to the client
+- Updated the `style.css` file to list the right name for the theme
+
+## Compiling with Grunt
+
+```
 # Install required dependencies
 sudo npm install
 # Run grunt to compile css
@@ -102,11 +105,23 @@ You can select which banner group to display here, rather than manually picking 
 ## Product list
 
 When you chose product lists, you can display products in four different ways:
+> You can list product by a category, this allows you to show only the latest products in a specific category.
 
-- Category selection
-- Featured products
-- Best sellers
-- New products
+### Category selection
+
+List products based on the selected category.
+
+### Featured products
+
+List products that
+
+### Best sellers
+
+List best sellers
+
+### New products
+
+List the products that are new to the shopping
 
 ## Columns of text
 
@@ -118,7 +133,8 @@ List the categories that are popular with woocommerce
 
 ## Block
 
-Reusable blocks
+Clever little things, blocks are. You'll see that there's a content type called `Blocks` on your Dashboard navigation. Blocks are pages to themselves, except we can call them as part of a layout.
+Ideal if you want to make content that you'll use 3-4 times throughout different pages, without needing
 
 ## Sub page list
 
@@ -143,6 +159,11 @@ Two `boolean` options are:
 # Banners
 
 Craft comes with build in Banner management. This comes in the form of a menu item in the Dashboard called `Banners`
+
+If you visit this link, you'll be able to treat banners like posts. Each post is a banner that you can use throughout the site.
+
+There is a *taxonomy* for banners called **Banner Group**. This allows you to group banners together and use them as a group.
+
 
 # Actions
 
