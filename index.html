@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;php&quot;,&quot;scss&quot;,&quot;javascript&quot;,&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;code&quot;,&quot;scss&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -101,10 +101,8 @@
     <div class="tocify-wrapper">
       <img src="images/logo.png" />
         <div class="lang-selector">
-              <a href="#" data-language-name="php">php</a>
+              <a href="#" data-language-name="code">code</a>
               <a href="#" data-language-name="scss">scss</a>
-              <a href="#" data-language-name="javascript">javascript</a>
-              <a href="#" data-language-name="shell">shell</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -137,20 +135,56 @@ the easiest way to install the theme is to download the repo here: <a href="http
 You must install the child theme, you must activate it to see your changes.
 </aside>
 
-<h2 id="grunt">Grunt</h2>
+<p>Once you&rsquo;ve installed the child theme, you can customise how it looks from the getgo:</p>
+
+<ul>
+<li>Change the <code class="prettyprint">screenshot.png</code> to something more relevent to the client</li>
+<li>Updated the <code class="prettyprint">style.css</code> file to list the right name for the theme</li>
+</ul>
+
+<h2 id="compiling-with-grunt">Compiling with Grunt</h2>
 <pre class="highlight shell"><code><span class="c"># Install required dependencies</span>
 sudo npm install
 <span class="c"># Run grunt to compile css</span>
 grunt
 </code></pre>
 
-<p>You need to run <code class="prettyprint">npm install</code> or <code class="prettyprint">sudo npm install</code> in the child theme folder to install the dependencies needed to complile.</p>
+<p>You need to run <code class="prettyprint">npm install</code> or <code class="prettyprint">sudo npm install</code> in the child theme folder to install the dependencies needed to compile scss.</p>
+
+<p>Once you&rsquo;ve completed the install, you can run <code class="prettyprint">grunt</code> to compile your css changes.
+Feel free to edit the grunt file in your child to best suit your workflow.
+There isn&rsquo;t any watch functionaliy in this current implementation to keep it lean.</p>
+
+<h2 id="overriding-parent-features">Overriding parent features</h2>
+<pre class="highlight php"><code><span class="cp">&lt;?php</span>
+  <span class="c1">// Remove function located at action
+</span>  <span class="nx">remove_action</span><span class="p">(</span> <span class="s1">'action_name'</span><span class="p">,</span> <span class="s1">'class_name::function_name'</span> <span class="p">);</span>
+</code></pre>
+
+<p>When working with the child theme, you&rsquo;re able to overwrite anything from Craft in two ways:</p>
+
+<aside class="notice">The unhook parents function is initiated earlier than the child functions to allow removal of the functions before they execute.</aside>
+
+<h3 id="actions">Actions</h3>
+
+<p>You can remove any parent functions by adding <code class="prettyprint">remove_actions</code> in the <code class="prettyprint">unhook_parent_features</code> function.</p>
+
+<h3 id="files">Files</h3>
+<pre class="highlight php"><code>/craft-child-theme/header.php
+</code></pre>
+
+<p>The file method is a little more dangerous, as you have to either replace the contents of the file you&rsquo;re overridding, or you have to copy the file over from the parent and change what you need.
+It&rsquo;s recommended that you use the actions method so updates and improvements to Craft can get through to your site.</p>
+
+<h1 id="styling">Styling</h1>
+
+<p>Some simple rules when styling. If you&rsquo;re targetting a specific area, you should name the <code class="prettyprint">.scss</code> file the name of the section you&rsquo;re targetting. This makes editing the site by collaborators in the future much easier.</p>
 
 <h1 id="content-management">Content management</h1>
 
 <p>Using Adanced custom fields, Craft comes with a layout building method that utilised the Flexible Content field.</p>
 
-<p>What this means is that most of your work is dont doe you when it comes to getting clients to build visually nice websites.</p>
+<p>What this means is that most of your work is done for you when it comes to getting clients to build visually nice websites.</p>
 
 <p>The current list of layouts available are:</p>
 
@@ -197,12 +231,25 @@ You have the option of selecting one of four layout options for the banners.</p>
 
 <p>When you chose product lists, you can display products in four different ways:</p>
 
-<ul>
-<li>Category selection</li>
-<li>Featured products</li>
-<li>Best sellers</li>
-<li>New products</li>
-</ul>
+<blockquote>
+<p>You can list product by a category, this allows you to show only the latest products in a specific category.</p>
+</blockquote>
+
+<h3 id="category-selection">Category selection</h3>
+
+<p>List products based on the selected category.</p>
+
+<h3 id="featured-products">Featured products</h3>
+
+<p>List products that</p>
+
+<h3 id="best-sellers">Best sellers</h3>
+
+<p>List best sellers</p>
+
+<h3 id="new-products">New products</h3>
+
+<p>List the products that are new to the shopping</p>
 
 <h2 id="columns-of-text">Columns of text</h2>
 
@@ -214,7 +261,8 @@ You have the option of selecting one of four layout options for the banners.</p>
 
 <h2 id="block">Block</h2>
 
-<p>Reusable blocks</p>
+<p>Clever little things, blocks are. You&rsquo;ll see that there&rsquo;s a content type called <code class="prettyprint">Blocks</code> on your Dashboard navigation. Blocks are pages to themselves, except we can call them as part of a layout.
+Ideal if you want to make content that you&rsquo;ll use 3-4 times throughout different pages, without needing</p>
 
 <h2 id="sub-page-list">Sub page list</h2>
 <pre class="highlight scss"><code><span class="c1">// Target each page that displays
@@ -238,6 +286,10 @@ You have the option of selecting one of four layout options for the banners.</p>
 <h1 id="banners">Banners</h1>
 
 <p>Craft comes with build in Banner management. This comes in the form of a menu item in the Dashboard called <code class="prettyprint">Banners</code></p>
+
+<p>If you visit this link, you&rsquo;ll be able to treat banners like posts. Each post is a banner that you can use throughout the site.</p>
+
+<p>There is a <em>taxonomy</em> for banners called <strong>Banner Group</strong>. This allows you to group banners together and use them as a group.</p>
 
 <h1 id="actions">Actions</h1>
 
@@ -417,10 +469,8 @@ To unhook Craft&rsquo;s parent features, you need to reference the class that is
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="php">php</a>
+                <a href="#" data-language-name="code">code</a>
                 <a href="#" data-language-name="scss">scss</a>
-                <a href="#" data-language-name="javascript">javascript</a>
-                <a href="#" data-language-name="shell">shell</a>
           </div>
       </div>
     </div>
