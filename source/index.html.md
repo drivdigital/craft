@@ -42,14 +42,18 @@ sudo npm install
 grunt
 ```
 
-You need to run `npm install` or `sudo npm install` in the child theme folder to install the dependencies needed to complile.
+You need to run `npm install` or `sudo npm install` in the child theme folder to install the dependencies needed to compile scss.
+
+Once you've completed the install, you can run `grunt` to compile your css changes.
+Feel free to edit the grunt file in your child to best suit your workflow.
+There isn't any watch functionaliy in this current implementation to keep it lean.
 
 
 # Content management
 
 Using Adanced custom fields, Craft comes with a layout building method that utilised the Flexible Content field.
 
-What this means is that most of your work is dont doe you when it comes to getting clients to build visually nice websites.
+What this means is that most of your work is done for you when it comes to getting clients to build visually nice websites.
 
 The current list of layouts available are:
 
