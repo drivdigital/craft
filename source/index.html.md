@@ -38,7 +38,7 @@ Once you've installed the child theme, you can customise how it looks from the g
 
 ## Compiling with Grunt
 
-```
+```shell
 # Install required dependencies
 sudo npm install
 # Run grunt to compile css
@@ -51,6 +51,34 @@ Once you've completed the install, you can run `grunt` to compile your css chang
 Feel free to edit the grunt file in your child to best suit your workflow.
 There isn't any watch functionaliy in this current implementation to keep it lean.
 
+## Overriding parent features
+```php
+<?php
+  // Remove function located at action
+  remove_action( 'action_name', 'class_name::function_name' );
+```
+
+When working with the child theme, you're able to overwrite anything from Craft in two ways:
+
+<aside class="notice">The unhook parents function is initiated earlier than the child functions to allow removal of the functions before they execute.</aside>
+
+### Actions
+
+You can remove any parent functions by adding `remove_actions` in the `unhook_parent_features` function.
+
+
+### Files
+
+```php
+/craft-child-theme/header.php
+```
+
+The file method is a little more dangerous, as you have to either replace the contents of the file you're overridding, or you have to copy the file over from the parent and change what you need.
+It's recommended that you use the actions method so updates and improvements to Craft can get through to your site.
+
+# Styling
+
+Some simple rules when styling. If you're targetting a specific area, you should name the `.scss` file the name of the section you're targetting. This makes editing the site by collaborators in the future much easier.
 
 # Content management
 
